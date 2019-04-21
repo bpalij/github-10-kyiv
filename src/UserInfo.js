@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 
-const UserDiv = styled.div`
+const UserDiv = styled.article`
     border: 1px solid black;
     width: 700px;
     margin: 0 auto 10px;
@@ -106,8 +106,8 @@ class UserInfo extends Component{
             <UserDiv>
                 <UserImg alt={`${this.props.login} avatar`} src={this.props.avatar_url} width="150px"></UserImg>
                 <div>
-                    <a href={this.props.html_url} target="_blank" rel="noopener noreferrer">{this.props.login}</a>
-                    <p>Total stars on own public repos: {this.props.starCount}</p>
+                    <section><a href={this.props.html_url} target="_blank" rel="noopener noreferrer">{this.props.login}</a></section>
+                    <section>Total stars on own public repos: {this.props.starCount}</section>
                 </div>
                 <ClearFix></ClearFix>
             </UserDiv>
