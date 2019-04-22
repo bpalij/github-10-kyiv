@@ -69,8 +69,9 @@ async function getAllOwnPublicReposOfUser(user){
         for (let pageNumber=1; true /* exits are specified inside */; pageNumber++) {
             temp=null;
             temp = await fetch(getOwnUserPublicRepoPageLink(user,pageNumber)) //getting a page with repos
-                .then((response) => {return response.json()}) //this could be a second await, but this will work fine too
-                .catch((e)=> {Promise.reject(e)}); //error handling here is not necessary, but added just to be more confident //experimented with different finishes of func (return-resolve, throw-reject)
+                .then((response) => {return response.json()}); //this could be a second await, but this will work fine too
+                // .catch((e)=> {Promise.reject(e)}); //error handling here is not necessary, but added just to be more confident //experimented with different finishes of func (return-resolve, throw-reject)
+            if (temp instanceof Error) {Promise.reject(temp)}; //error handling
             if (!Array.isArray(temp)) {throw new Error("Not-array response!")}; //just for safety //experimented with different finishes of func (return-resolve, throw-reject)
             if (temp.length>100) {throw new Error("Array bigger than must be!")}; //just for safety //experimented with different finishes of func (return-resolve, throw-reject)
             if (temp.length===0) {return resultArray} //empty page = repos are on the previous ones or the user has no repos, no need to continue //experimented with different finishes of func (return-resolve, throw-reject)
